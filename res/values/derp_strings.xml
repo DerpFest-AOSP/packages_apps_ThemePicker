@@ -6,4 +6,10 @@
 <resources>
     <string name="udfps_animation_title">Fingerprint animations</string>
     <string name="new_title">New</string>
+
+    <!-- Title of a page that shows the user the preview of a set of UI styles [CHAR_LIMIT=20] -->
+    <string name="preview_name_ui_style">UI Style</string>
+
+    <!-- Content description of UI style preview. [CHAR_LIMIT=30]-->
+    <string name="ui_style_preview_content_description">UI Style preview</string>
 </resources>
