@@ -62,7 +62,7 @@ class UdfpsAnimationSectionController(
             val fingerprintManager =
                 context.getSystemService(Context.FINGERPRINT_SERVICE) as FingerprintManager
             val udfpsProps =
-                fingerprintManager.getSensorPropertiesInternal().map { it.isAnyUdfpsType() }
+                fingerprintManager.getSensorPropertiesInternal().filter { it.isAnyUdfpsType() }
             udfpsProps.isNotEmpty() // return
             } else {
                 false    
