@@ -53,6 +53,7 @@ import com.android.customization.picker.grid.domain.interactor.GridSnapshotResto
 import com.android.customization.picker.grid.ui.viewmodel.GridScreenViewModel
 import com.android.customization.picker.notifications.domain.interactor.NotificationsSnapshotRestorer
 import com.android.customization.picker.notifications.ui.viewmodel.NotificationSectionViewModel
+import com.android.customization.picker.qs.ui.viewmodel.QSSectionViewModel
 import com.android.customization.picker.quickaffordance.domain.interactor.KeyguardQuickAffordancePickerInteractor
 import com.android.customization.picker.quickaffordance.domain.interactor.KeyguardQuickAffordanceSnapshotRestorer
 import com.android.customization.picker.quickaffordance.ui.viewmodel.KeyguardQuickAffordancePickerViewModel
@@ -96,6 +97,7 @@ constructor(
     private var clockViewFactory: ClockViewFactory? = null
     private var notificationSettingsInteractor: NotificationSettingsInteractor? = null
     private var notificationSectionViewModelFactory: NotificationSectionViewModel.Factory? = null
+    private var qsSectionViewModelFactory: QSSectionViewModel.Factory? = null
     private var colorPickerViewModelFactory: ColorPickerViewModel.Factory? = null
     private var colorCustomizationManager: ColorCustomizationManager? = null
     private var darkModeSnapshotRestorer: DarkModeSnapshotRestorer? = null
@@ -134,6 +136,7 @@ constructor(
                     getKeyguardQuickAffordancePickerViewModelFactory(appContext),
                     colorContrastSectionViewModelFactory.get(),
                     getNotificationSectionViewModelFactory(appContext),
+                    getQSSectionViewModelFactory(appContext),
                     getFlags(),
                     getClockCarouselViewModelFactory(
                         interactor = clockPickerInteractor.get(),
@@ -225,6 +228,16 @@ constructor(
                     logger = getUserEventLogger(),
                 )
                 .also { notificationSectionViewModelFactory = it }
+    }
+
+    fun getQSSectionViewModelFactory(
+        context: Context
+    ): QSSectionViewModel.Factory {
+        return qsSectionViewModelFactory
+            ?: QSSectionViewModel.Factory(
+                overlayManagerCompat = OverlayManagerCompat(context)
+            )
+                .also {qsSectionViewModelFactory = it }
     }
 
     private fun getNotificationsInteractor(context: Context): NotificationSettingsInteractor {

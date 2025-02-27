@@ -31,6 +31,8 @@ import com.android.customization.picker.grid.domain.interactor.GridInteractor;
 import com.android.customization.picker.grid.ui.section.GridSectionController;
 import com.android.customization.picker.notifications.ui.section.NotificationSectionController;
 import com.android.customization.picker.notifications.ui.viewmodel.NotificationSectionViewModel;
+import com.android.customization.picker.qs.QSSectionController;
+import com.android.customization.picker.qs.ui.viewmodel.QSSectionViewModel;
 import com.android.customization.picker.preview.ui.section.PreviewWithClockCarouselSectionController;
 import com.android.customization.picker.preview.ui.section.PreviewWithThemeSectionController;
 import com.android.customization.picker.quickaffordance.ui.section.KeyguardQuickAffordanceSectionController;
@@ -65,6 +67,7 @@ public final class DefaultCustomizationSections implements CustomizationSections
     private final ColorContrastSectionViewModel.Factory
             mColorContrastSectionViewModelFactory;
     private final NotificationSectionViewModel.Factory mNotificationSectionViewModelFactory;
+    private final QSSectionViewModel.Factory mQSSectionViewModelFactory;
     private final BaseFlags mFlags;
     private final ClockCarouselViewModel.Factory mClockCarouselViewModelFactory;
     private final ClockViewFactory mClockViewFactory;
@@ -80,6 +83,7 @@ public final class DefaultCustomizationSections implements CustomizationSections
                     keyguardQuickAffordancePickerViewModelFactory,
             ColorContrastSectionViewModel.Factory colorContrastSectionViewModelFactory,
             NotificationSectionViewModel.Factory notificationSectionViewModelFactory,
+            QSSectionViewModel.Factory qsSectionViewModelFactory,
             BaseFlags flags,
             ClockCarouselViewModel.Factory clockCarouselViewModelFactory,
             ClockViewFactory clockViewFactory,
@@ -92,6 +96,7 @@ public final class DefaultCustomizationSections implements CustomizationSections
         mKeyguardQuickAffordancePickerViewModelFactory =
                 keyguardQuickAffordancePickerViewModelFactory;
         mNotificationSectionViewModelFactory = notificationSectionViewModelFactory;
+        mQSSectionViewModelFactory = qsSectionViewModelFactory;
         mFlags = flags;
         mClockCarouselViewModelFactory = clockCarouselViewModelFactory;
         mClockViewFactory = clockViewFactory;
@@ -224,6 +229,14 @@ public final class DefaultCustomizationSections implements CustomizationSections
                                 savedInstanceState,
                                 mThemedIconSnapshotRestorer,
                                 mThemesUserEventLogger));
+
+                // QS gradient section controller
+                sectionControllers.add(
+                        new QSSectionController(new ViewModelProvider(
+                                activity,
+                                mQSSectionViewModelFactory)
+                                .get(QSSectionViewModel.class),
+                                lifecycleOwner));
 
                 // Color contrast section
                 if (mFlags.isColorContrastControlEnabled()) {
