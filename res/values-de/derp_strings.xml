@@ -9,4 +9,5 @@
     <string name="new_title">Neu</string>
 
     <string name="qs_gradient_title">Schnelleinstellungen Farbverlaufs-Design</string>
+    <string name="qs_gradient_dark_theme_only">Diese Funktion ist nur im dunklen Design verfügbar</string>
 </resources>

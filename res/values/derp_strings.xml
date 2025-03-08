@@ -9,4 +9,5 @@
     <string name="new_title">New</string>
 
     <string name="qs_gradient_title">Quick settings gradient theme</string>
+    <string name="qs_gradient_dark_theme_only">This feature is only available in dark theme</string>
 </resources>
